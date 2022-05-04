@@ -1,0 +1,172 @@
+﻿body {
+}
+
+
+:root {
+    --blue: #1890ff;
+    --hot: #ff4d4d;
+    --black : #262626;
+}
+
+.font-12 {
+    font-size: 12px;
+}
+
+.font-14 {
+    font-size: 14px;
+}
+
+.blue {
+    color: var(--blue);
+}
+
+.new-tag {
+    font-size: 8px !important;
+    font-weight: bold;
+    padding: 3px;
+    background-color: var(--hot);
+    border-radius: 2px;
+}
+
+.nav-item {
+    position: relative;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.navbar-text {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.nav-item:hover .text-line {
+    width: 100%;
+}
+
+.text-line {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 00px;
+    background-color: var(--blue);
+    transition: all 0.8s ease;
+}
+
+
+.logo-img{
+    width : 100%;
+    height:100px;
+}
+
+.btn a{
+    color:white;
+    text-decoration:none;
+    
+}
+
+.card {
+    background-color: white !important;
+    border: none !important;
+    border-radius: 0px !important;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px !important
+}
+
+    .card:hover {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px !important
+    }
+
+    .card > a {
+        text-decoration: none !important;
+        color: black !important
+    }
+
+#blockitems {
+    margin-right: 0px !important;
+    margin-left: 0px !important
+}
+
+#icons_section {
+    width: 30%;
+    text-align: center;
+    padding: 0% !important
+}
+
+    #icons_section > i {
+        font-size: 25px;
+        color: black !important
+    }
+
+#heading_section {
+    width: 70%
+}
+
+    #heading_section > h6 {
+        margin-bottom: 0px !important;
+        color: var(--black) !important
+    }
+
+    #heading_section > p {
+        font-size: 14px !important
+    }
+
+.cssanimation {
+    animation-duration: 1s;
+    animation-fill-mode: both
+}
+
+.fadeInBottom {
+    animation-name: fadeInBottom
+}
+
+@keyframes fadeInBottom {
+    from {
+        opacity: 0;
+        transform: translateY(100%)
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+.cssanimation2 {
+    animation-duration: 2s;
+    animation-fill-mode: both
+}
+
+.fadeInBottom2 {
+    animation-name: fadeInBottom
+}
+
+@keyframes fadeInBottom2 {
+    from {
+        opacity: 0;
+        transform: translateY(100%)
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+.cssanimation3 {
+    animation-duration: 3s;
+    animation-fill-mode: both
+}
+
+.fadeInBottom3 {
+    animation-name: fadeInBottom
+}
+
+@keyframes fadeInBottom3 {
+    from {
+        opacity: 0;
+        transform: translateY(100%)
+    }
+
+    to {
+        opacity: 1
+    }
+}
+

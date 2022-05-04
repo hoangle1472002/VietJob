@@ -19,6 +19,7 @@ namespace JobPortal.Models
         public string ContactNumber { get; set; } = null!;
         public string? UserImageUrl { get; set; }
         public DateTime RegistrationDate { get; set; }
+     
 
         public virtual UserType UserType { get; set; } = null!;
         public virtual SeekerProfile SeekerProfile { get; set; } = null!;

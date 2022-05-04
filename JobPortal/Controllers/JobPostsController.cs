@@ -1,4 +1,5 @@
-﻿#nullable disable
+﻿
+#nullable disable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using JobPortal.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace JobPortal.Controllers
 {
@@ -23,6 +25,7 @@ namespace JobPortal.Controllers
         public async Task<IActionResult> Index()
         {
             var jobPortalWebContext = _context.JobPosts.Include(j => j.Company).Include(j => j.JobType);
+              
             return View(await jobPortalWebContext.ToListAsync());
         }
 
@@ -59,16 +62,22 @@ namespace JobPortal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,JobTypeId,CompanyId,CreatedDate,JobDescription,JobLocation")] JobPost jobPost)
+     
+        public async Task<IActionResult> Create([Bind("Id,JobTypeId,CompanyId,CreatedDate,JobDescription")] JobPost jobPost)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(jobPost);
-                await _context.SaveChangesAsync();
+               _context.JobPosts.Add(jobPost);
+               _context.Add(jobPost);
+              await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+           // _context.Add(jobPost);
+           // await _context.SaveChangesAsync();
+           // return RedirectToAction(nameof(Index));
             ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id", jobPost.CompanyId);
             ViewData["JobTypeId"] = new SelectList(_context.JobTypes, "Id", "Id", jobPost.JobTypeId);
+
             return View(jobPost);
         }
 
@@ -122,6 +131,9 @@ namespace JobPortal.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            _context.Update(jobPost);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
             ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id", jobPost.CompanyId);
             ViewData["JobTypeId"] = new SelectList(_context.JobTypes, "Id", "Id", jobPost.JobTypeId);
             return View(jobPost);

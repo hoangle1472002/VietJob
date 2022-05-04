@@ -8,6 +8,18 @@ string connection = builder.Configuration.GetConnectionString("DefaultConnection
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<JobPortalWebContext>(options => options.UseSqlServer(connection));
 
+
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,6 +36,13 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
+
+app.MapAreaControllerRoute(
+            name: "ADMIN",
+            areaName: "ADMIN",
+            pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

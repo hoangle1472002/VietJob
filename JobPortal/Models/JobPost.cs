@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace JobPortal.Models
 {
@@ -13,6 +14,7 @@ namespace JobPortal.Models
         public int Id { get; set; }
         public int JobTypeId { get; set; }
         public int CompanyId { get; set; }
+        [DataType(DataType.Date)]
         public DateTime CreatedDate { get; set; }
         public string JobDescription { get; set; } = null!;
         public string JobLocation { get; set; } = null!;
