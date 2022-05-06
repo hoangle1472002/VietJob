@@ -1,6 +1,5 @@
 ﻿
 @using Microsoft.AspNetCore.Http
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,25 +15,27 @@
     <header>
          <nav class=" shadow-sm  navbar navbar-expand-lg navbar-light bg-light bo">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Logo</a>
+          <a class="navbar-brand" href="#">
+              @*<img src="~/img/Group 37.png" alt="logo"/>*@
+          </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active blue" aria-current="page" asp-controller="UserAccounts" asp-action="Index">User</a>
+                <a class="nav-link active blue" aria-current="page"  asp-controller="Home" asp-action="Index">Trang chủ</a>
                 <div class="text-line"></div>
             </li>
               <li class="nav-item">
-                <a class="nav-link blue" asp-controller="JobPosts" asp-action="Index">Tìm việc
+                <a class="nav-link blue"  asp-controller="JobPosts" asp-action="GetAllJobs">Công việc
                     <span class="text-white new-tag ">NEW</span>
                 </a>
                 <div class="text-line"></div>
             </li>
            
               <li class="nav-item">
-                <a class="nav-link" asp-controller="Companies" asp-action="Index" >Công ty
+                <a class="nav-link"  asp-controller="Companies" asp-action="GetAllCompanies" >Công ty
                     <span class=" text-white new-tag ">NEW</span>
                 </a>
                 <div class="text-line"></div>
@@ -43,25 +44,31 @@
             </ul>
             <span class="navbar-text">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                      <a class="nav-link active"  asp-controller="UserAccounts" asp-action="Create"  aria-current="page" >Đăng ký</a>
+                   
+                        <li class="nav-item">
+                      <a class="nav-link active"  asp-controller="UserAccounts" asp-action="Logout"  aria-current="page" >Đăng xuất</a>
+                      <div class="text-line"></div>
+                                </li>
+                        
+                                         <li class="nav-item">
+                      <a class="nav-link active"   asp-controller="UserAccounts" asp-action="Create"  aria-current="page" >Đăng ký</a>
                       <div class="text-line"></div>
                   </li>
                     <li class="nav-item">
-                      <a class="nav-link" asp-controller="UserAccounts" asp-action="Login">Đăng nhập
+                      <a class="nav-link"   asp-controller="UserAccounts" asp-action="Login">Đăng nhập
                       </a>
                       <div class="text-line"></div>
-                  </li>
-             
-
+                  </li> 
+                            
+                  
                  
-                  <li class="nav-item">
+                 @* <li class="nav-item">
                     <a class="nav-link" href="#">
                         <div class="font-14 blue fw-bold">NHÀ TUYỂN DỤNG</div>
                         <div class="font-12">Đăng tin & tìm ứng viên</div>
                     </a>
                     <div class="text-line"></div>
-                </li>
+                </li>*@
                   
               
                   </ul>

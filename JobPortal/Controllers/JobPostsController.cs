@@ -28,7 +28,11 @@ namespace JobPortal.Controllers
               
             return View(await jobPortalWebContext.ToListAsync());
         }
-
+        public async Task<IActionResult> GetAllJobs()
+        {
+            var jobPortalWebContext = _context.JobPosts.Include(j => j.Company).Include(j => j.JobType);
+            return View(await jobPortalWebContext.ToListAsync());
+        }
         // GET: JobPosts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -67,10 +71,10 @@ namespace JobPortal.Controllers
         {
             if (ModelState.IsValid)
             {
-               _context.JobPosts.Add(jobPost);
-               _context.Add(jobPost);
-              await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                 _context.JobPosts.Add(jobPost);
+                 _context.Add(jobPost);
+                 await _context.SaveChangesAsync();
+                  return RedirectToAction(nameof(Index));
             }
            // _context.Add(jobPost);
            // await _context.SaveChangesAsync();

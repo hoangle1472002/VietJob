@@ -66,18 +66,54 @@ namespace JobPortal.Controllers
         {
             //     if (ModelState.IsValid)
             //     {
-            userAccount.RegistrationDate = DateTime.Now;
-            userAccount.Password = GetMD5(userAccount.Password);
+            var check = _context.UserAccounts.Where(s => s.Email.Equals(userAccount.Email));
+            if(check == null)
+            {
+                userAccount.RegistrationDate = DateTime.Now;
+                userAccount.Password = GetMD5(userAccount.Password);
                 _context.Add(userAccount);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            //     }
-            ViewData["UserTypeId"] = new SelectList(_context.UserTypes, "Id", "Id", userAccount.UserTypeId);
-            //ViewData["UserTypeName"] = new SelectList(_context.UserTypes, "Id", "UserTypeName");
-            return View(userAccount);
+            }
+            else
+            {
+                ViewBag.error = "Email already exists";
+                return View();
+            }
+            //ViewData["UserTypeId"] = new SelectList(_context.UserTypes, "Id", "Id", userAccount.UserTypeId);
+            //return View(userAccount);
+        }
+        public ActionResult Login()
+        {
+            return View();
         }
 
-        //create a string MD5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string email, string password)
+        {
+            if (ModelState.IsValid)
+            {
+                var f_password = GetMD5(password);
+                var data = _context.UserAccounts.Where(s => s.Email.Equals(email)
+                    && s.Password.Equals(f_password)).ToList();
+                if (data.Count > 0)
+                {
+                    //Add Session
+                    HttpContext.Session.SetString("Email", data.FirstOrDefault().Email);
+                    HttpContext.Session.SetInt32("UserTypeId", data.FirstOrDefault().UserTypeId);
+                    return RedirectToAction("Index","Home");
+                }
+                else
+                {
+                    ViewBag.error = "Login Failed";
+                    return View();
+                }
+
+            }
+            return View();
+        }
+     
         public static string GetMD5(string str)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
@@ -92,6 +128,9 @@ namespace JobPortal.Controllers
             }
             return byte2String;
         }
+
+        //create a string MD5
+
 
 
         // GET: UserAccounts/Edit/5
@@ -183,43 +222,7 @@ namespace JobPortal.Controllers
         }
 
 
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(string email, string password)
-        {
-            if (ModelState.IsValid)
-            {
-                var f_password = GetMD5(password);
-                var data = _context.UserAccounts.Where(s => s.Email.Equals(email)
-                    && s.Password.Equals(f_password)).ToList();
-                if(data.Count > 0)
-                {
-                    //Add Session
-                    HttpContext.Session.SetString("Email", data.FirstOrDefault().Email);
-                    HttpContext.Session.SetInt32("idUser",data.FirstOrDefault().Id);
-                    if(data.FirstOrDefault().UserTypeId == 1)
-                    {
-                        return RedirectToAction("Index");
-                    }
-                    else
-                    {
-                        return RedirectToAction("Create");
-                    }
-                }
-                else
-                {
-                    ViewBag.error = "Login Failed";
-                    return RedirectToAction("Login");
-                }
-              
-            }
-            return View();
-        }
+     
 
     }
 }

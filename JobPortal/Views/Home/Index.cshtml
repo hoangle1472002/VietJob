@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@if(@ViewBag.UserTypeId == 1)
+{
+    <a asp-controller="Home" asp-action="AdminHome">Admin Page</a>
+}

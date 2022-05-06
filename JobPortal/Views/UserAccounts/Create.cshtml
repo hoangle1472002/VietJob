@@ -3,13 +3,6 @@
 @{
     ViewData["Title"] = "Create";
 }
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - JobPortal</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/Home/Login.css"   asp-append-version="true" />
-</head>
 
 <h1>Create</h1>
 
@@ -20,7 +13,7 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
+                <label  asp-for="Id" class="control-label"></label>
                 <input asp-for="Id" class="form-control" />
                 <span asp-validation-for="Id" class="text-danger"></span>
             </div>
@@ -58,7 +51,7 @@
                 <input asp-for="UserImageUrl" class="form-control" />
                 <span asp-validation-for="UserImageUrl" class="text-danger"></span>
             </div>
-           
+            <p class="text-danger">@ViewBag.error</p>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -70,6 +63,3 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

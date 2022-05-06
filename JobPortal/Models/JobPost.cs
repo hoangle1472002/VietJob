@@ -14,7 +14,7 @@ namespace JobPortal.Models
         public int Id { get; set; }
         public int JobTypeId { get; set; }
         public int CompanyId { get; set; }
-        [DataType(DataType.Date)]
+       // [DataType(DataType.Date)]
         public DateTime CreatedDate { get; set; }
         public string JobDescription { get; set; } = null!;
         public string JobLocation { get; set; } = null!;
