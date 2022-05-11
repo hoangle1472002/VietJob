@@ -52,8 +52,7 @@ namespace JobPortal.Controllers
         // GET: UserAccounts/Create
         public IActionResult Create()
         {
-                ViewData["UserTypeId"] = new SelectList(_context.UserTypes, "Id", "Id");
-            //ViewData["UserTypeName"] = new SelectList(_context.UserTypes,"Id","UserTypeName");
+            ViewData["UserTypeId"] = new SelectList(_context.UserTypes, "Id", "Id");
             return View();
         }
 
@@ -97,9 +96,12 @@ namespace JobPortal.Controllers
                 var f_password = GetMD5(password);
                 var data = _context.UserAccounts.Where(s => s.Email.Equals(email)
                     && s.Password.Equals(f_password)).ToList();
+                
                 if (data.Count > 0)
                 {
                     //Add Session
+                    HttpContext.Session.SetInt32("UserAccountId", data.FirstOrDefault().Id);
+                    int a = (int)HttpContext.Session.GetInt32("UserAccountId");
                     HttpContext.Session.SetString("Email", data.FirstOrDefault().Email);
                     HttpContext.Session.SetInt32("UserTypeId", data.FirstOrDefault().UserTypeId);
                     return RedirectToAction("Index","Home");
@@ -112,6 +114,12 @@ namespace JobPortal.Controllers
 
             }
             return View();
+        }
+
+        public ActionResult Logout()
+        {
+            HttpContext.Session.Clear();//Remove session of login
+            return RedirectToAction("Login");
         }
      
         public static string GetMD5(string str)

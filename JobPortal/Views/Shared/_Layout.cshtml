@@ -3,94 +3,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - JobPortal</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/JobPortal.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/mainLayout.css"   asp-append-version="true" />
+
+ <title>@ViewData["Title"] - JobPortal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Job Portal Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href="~/css/bootstrap-3.1.1.min.css" rel='stylesheet' type='text/css' />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="~/js/jquery.min.js" asp-append-version="true"></script>
+<script src="~/js/bootstrap.min.js" asp-append-version="true"></script>
+<!-- Custom Theme files -->
+<link href="~/css/style.css" rel='stylesheet' type='text/css' asp-append-version="true" />
+<link href='//fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css' asp-append-version="true">
+<!----font-Awesome----->
+<link href="~/css/font-awesome.css" rel="stylesheet" asp-append-version="true"> 
+<!----font-Awesome----->
 </head>
 <body>
-    <header>
-         <nav class=" shadow-sm  navbar navbar-expand-lg navbar-light bg-light bo">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-              @*<img src="~/img/Group 37.png" alt="logo"/>*@
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active blue" aria-current="page"  asp-controller="Home" asp-action="Index">Trang chủ</a>
-                <div class="text-line"></div>
-            </li>
-              <li class="nav-item">
-                <a class="nav-link blue"  asp-controller="JobPosts" asp-action="GetAllJobs">Công việc
-                    <span class="text-white new-tag ">NEW</span>
-                </a>
-                <div class="text-line"></div>
-            </li>
-           
-              <li class="nav-item">
-                <a class="nav-link"  asp-controller="Companies" asp-action="GetAllCompanies" >Công ty
-                    <span class=" text-white new-tag ">NEW</span>
-                </a>
-                <div class="text-line"></div>
-            </li>
-        
-            </ul>
-            <span class="navbar-text">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                   
-                        <li class="nav-item">
-                      <a class="nav-link active"  asp-controller="UserAccounts" asp-action="Logout"  aria-current="page" >Đăng xuất</a>
-                      <div class="text-line"></div>
-                                </li>
-                        
-                                         <li class="nav-item">
-                      <a class="nav-link active"   asp-controller="UserAccounts" asp-action="Create"  aria-current="page" >Đăng ký</a>
-                      <div class="text-line"></div>
-                  </li>
-                    <li class="nav-item">
-                      <a class="nav-link"   asp-controller="UserAccounts" asp-action="Login">Đăng nhập
-                      </a>
-                      <div class="text-line"></div>
-                  </li> 
-                            
-                  
-                 
-                 @* <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <div class="font-14 blue fw-bold">NHÀ TUYỂN DỤNG</div>
-                        <div class="font-12">Đăng tin & tìm ứng viên</div>
-                    </a>
-                    <div class="text-line"></div>
-                </li>*@
-                  
-              
-                  </ul>
-            </span>
-          </div>
-        </div>
-      </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <nav class="navbar navbar-default" role="navigation">
+	<div class="container">
+	    <div class="navbar-header">
+	        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+	        </button>
+	        <a class="navbar-brand" asp-controller="Home" asp-action="Index" >
+				<img class="logo-img" src="~/img/Group 37.png" alt="Logo"/>
+				<h2 class="navbar-logo-title">VietJobs</h2>
+			</a>
+	    </div>
+	    <!--/.navbar-header-->
+	    <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height: 1px;">
+	        <ul class="nav navbar-nav ">
+		        <li class="dropdown nav-link-item">
+		            <a asp-controller="JobPosts" asp-action="GetAllJobs"  >Jobs</a>
+					<div class="under-line"></div>
+				</li>
+		        <li class="dropdown nav-link-item">
+		        	<a asp-controller="Companies" asp-action="GetAllCompanies" >Companies</a>
+					<div class="under-line"></div>
+				</li>
+		        <li class="nav-link-item">
+					<a asp-controller="UserAccounts" asp-action="Login" >Login</a>
+					<div class="under-line"></div>
+				</li>
+				<li class="nav-link-item">
+					<a asp-controller="UserAccounts" asp-action="Logout">Logout</a>
+					<div class="under-line"></div>
+				</li>
+			</ul>
+	    </div>
+	    <div class="clearfix"> </div>
+	  </div>
+	</nav>
+ 
             @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - JobPortal - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+	 <div class="footer">
+		<div class="container">
+			<div class="col-md-3 grid_3">
+				<h4>Navigate</h4>
+				<ul class="f_list f_list1">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="login.html">Sign In</a></li>
+					<li><a href="login.html">Join Now</a></li>
+					<li><a href="about.html">About</a></li>
+				</ul>
+				<ul class="f_list">
+					<li><a href="features.html">Features</a></li>
+					<li><a href="terms.html">Terms of use</a></li>
+					<li><a href="contact.html">Contact Us</a></li>
+					<li><a href="jobs.html">Post a Job</a></li>
+				</ul>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="col-md-3 grid_3">
+				<h4>Twitter Widget</h4>
+				<div class="footer-list">
+				  <ul>
+					<li><i class="fa fa-twitter tw1"> </i><p><span class="yellow"><a href="#">consectetuer</a></span> adipiscing elit web design</p></li>
+					<li><i class="fa fa-twitter tw1"> </i><p><span class="yellow"><a href="#">consectetuer</a></span> adipiscing elit web design</p></li>
+					<li><i class="fa fa-twitter tw1"> </i><p><span class="yellow"><a href="#">consectetuer</a></span> adipiscing elit web design</p></li>
+				  </ul>
+				</div>
+			</div>
+			<div class="col-md-3 grid_3">
+				<h4>Job Portal</h4>
+				<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
+			</div>
+			<div class="col-md-3 grid_3">
+				<h4>Sign up for our newsletter</h4>
+				<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.</p>
+				<form>
+					<input type="text" class="form-control" placeholder="Enter your email">
+					<button type="button" class="btn red">Subscribe now!</button>
+				</form>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+	<div class="footer_bottom">	
+	  <div class="container">
+		<div class="col-sm-2">
+  			<ul class="f_list2">
+				<li><a href="jobs.html">Russia Jobs</a></li>
+				<li><a href="jobs.html">Australia Jobs</a></li>
+				<li><a href="jobs.html">Srilanka Jobs</a></li>
+				<li><a href="jobs.html">Poland Jobs</a></li>
+			</ul>
+  		</div>
+  		<div class="col-sm-2">
+  			<ul class="f_list2">
+				<li><a href="jobs.html">New Zealand Jobs</a></li>
+				<li><a href="jobs.html">Pakistan Jobs</a></li>
+				<li><a href="jobs.html">Srilanka Jobs</a></li>
+				<li><a href="jobs.html">Irland Jobs</a></li>
+			</ul>
+  		</div>
+  		<div class="col-sm-2">
+  			<ul class="f_list2">
+				<li><a href="jobs.html">Canada Jobs</a></li>
+				<li><a href="jobs.html">Germany Jobs</a></li>
+				<li><a href="jobs.html">China Jobs</a></li>
+				<li><a href="jobs.html">Nepal Jobs</a></li>
+			</ul>
+  		</div>
+  		<div class="col-sm-6 footer_text">
+		   <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numqua"</p>
+  		</div>
+  		<div class="clearfix"> </div>
+		<div class="copy">
+			<p>Copyright © 2018 Job Portal <a href="#" target="_blank"></a> </p>
+		</div>
+	  </div>
+	</div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+	 <script src="~/js/jquery.flexisel.js" asp-append-version="true"></script>
+	  <script src="~/js/jquery.wmuSlider.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

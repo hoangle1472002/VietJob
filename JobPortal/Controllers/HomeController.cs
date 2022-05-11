@@ -12,10 +12,7 @@ namespace JobPortal.Controllers
         // GET: HomeController
         public ActionResult Index()
         {
-            if(HttpContext.Session.GetInt32("UserTypeId") == 1)
-            {
-                ViewBag.UserTypeId = HttpContext.Session.GetInt32("UserTypeId");
-            }
+            ViewBag.UserTypeId = HttpContext.Session.GetInt32("UserTypeId");
             return View();
         }
         public ActionResult AdminHome()

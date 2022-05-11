@@ -72,6 +72,34 @@ namespace JobPortal.Controllers
             return View(jobPostActivity);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ApplyJob(int id)
+        {
+            JobPostActivity data = new JobPostActivity();
+            int userAccountsId = 0;
+            bool isValued = false;
+            if(HttpContext.Session.GetInt32("UserAccountId") != null)
+            {
+                isValued = true;
+                userAccountsId = (int)HttpContext.Session.GetInt32("UserAccountId");
+            }
+            if(userAccountsId > 0 && isValued == true)
+            {
+                data.JobPostId = id;
+                data.UserAccountId = userAccountsId;
+                data.ApplyDate = DateTime.Now;
+                _context.Add(data);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("GetAllJobs", "JobPosts");
+            }
+            else
+            {
+                return RedirectToAction("Login","UserAccounts");
+            }
+         
+        }
+
         // GET: JobPostActivities/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
