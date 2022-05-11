@@ -83,20 +83,25 @@ namespace JobPortal.Controllers
             {
                 isValued = true;
                 userAccountsId = (int)HttpContext.Session.GetInt32("UserAccountId");
-            }
-            if(userAccountsId > 0 && isValued == true)
-            {
-                data.JobPostId = id;
-                data.UserAccountId = userAccountsId;
-                data.ApplyDate = DateTime.Now;
-                _context.Add(data);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("GetAllJobs", "JobPosts");
+                if (userAccountsId > 0 && isValued == true)
+                {
+                    data.JobPostId = id;
+                    data.UserAccountId = userAccountsId;
+                    data.ApplyDate = DateTime.Now;
+                    _context.Add(data);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("GetAllJobs", "JobPosts");
+                }
+                else
+                {
+                    return RedirectToAction("Login", "UserAccounts");
+                }
             }
             else
             {
-                return RedirectToAction("Login","UserAccounts");
+                return RedirectToAction("Login", "UserAccounts");
             }
+          
          
         }
 

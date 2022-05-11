@@ -65,19 +65,19 @@ namespace JobPortal.Controllers
         {
             //     if (ModelState.IsValid)
             //     {
-            var check = _context.UserAccounts.Where(s => s.Email.Equals(userAccount.Email));
-            if(check == null)
+            var check = _context.UserAccounts.Where(s => s.Email.Equals(userAccount.Email)).ToList();
+            if(check.Count == 0)
             {
                 userAccount.RegistrationDate = DateTime.Now;
                 userAccount.Password = GetMD5(userAccount.Password);
                 _context.Add(userAccount);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Login");
             }
             else
             {
                 ViewBag.error = "Email already exists";
-                return View();
+                return RedirectToAction("Login");
             }
             //ViewData["UserTypeId"] = new SelectList(_context.UserTypes, "Id", "Id", userAccount.UserTypeId);
             //return View(userAccount);
