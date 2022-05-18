@@ -3,31 +3,25 @@
 @{
     ViewData["Title"] = "Details";
 }
-<div class="banner_1">
-	<div class="container">
-		<form asp-controller="JobPostActivities" asp-action="ApplyJob" asp-route-id="@Model.Id" >
-			<div id="search_wrapper1">
-					 <input type="submit" class="btn2 btn-2 btn2-1b" value="Apply"/>
-			   </div>
-		</form>
-		</div>
-  </div> 
-
 <div class="container">
     <div class="single">  
 	   <div class="col-md-9 single_right">
 	       <dl class="experience">
 	       	 <div class="experience_content experience_content1">
-	       	   <div class="experience_period"> 
-	       		 <small>Created Date:</small><br><span>@Model.CreatedDate</span>
-	       	   </div>
 	       	   <div class="experience_1"><dt>
 					  <h6>@Model.Company.CompanyName</h6>
 					  <h6>@Model.JobType.JobType1</h6>
+					    		 <small>Created Date:</small><br><span>@Model.CreatedDate</span>
 					  </dt>
 	       		 <dd>
 	       		 	<p>@Model.JobDescription</p>
-	       		 </dd></div>
+	       		 </dd>
+					<form asp-controller="JobPostActivities" asp-action="ApplyJob" asp-route-id="@Model.Id" >
+						<div id="search_wrapper1">
+								 <input type="submit" class="btn2 btn-2 btn2-1b" value="Apply"/>
+						   </div>
+					</form>
+					</div>
 	       	   </div>
 	       	  
 	       </dl>
@@ -113,7 +107,7 @@
 			<div class="clearfix"></div>	
 		   </div>
 		   <div class="candidate_2"> 	
-			 <div class="thumb"><img src="./imgpic5.jpg" class="img-responsive" alt=""/></div>
+			 <div class="thumb"><img src="./img/pic5.jpg" class="img-responsive" alt=""/></div>
              <div class="thumb_desc">
 			   <h6 class="title"><a href="#">consectetur</a></h6>
 			   <span class="meta">27 Years Old - Sydney, AU</span>

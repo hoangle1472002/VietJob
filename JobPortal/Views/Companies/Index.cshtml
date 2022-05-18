@@ -4,13 +4,20 @@
     ViewData["Title"] = "Index";
 }
 
-
-     <div class="container-fluid">
+ <div class="container">
          
     <h1>Manage Company</h1>
     <p>
         <a class="btn btn-primary" asp-action="Create">Create New</a>
     </p>
+
+    <form asp-controller="Companies" asp-action="Index">
+    <p>
+        <input type="text" name="SearchString" placeholder="Enter Company" />
+        <input type="submit" value="Search" />
+    </p>
+</form>
+
       <div class="row">
 @foreach (var item in Model) {
          <div class="col col-xl-4 my-4">

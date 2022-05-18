@@ -20,9 +20,14 @@ namespace JobPortal.Controllers
         }
 
         // GET: JobPostActivities
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
+            int search = Convert.ToInt32(searchString);
             var jobPortalWebContext = _context.JobPostActivities.Include(j => j.JobPost).Include(j => j.UserAccount);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                return View(await jobPortalWebContext.Where(p => p.JobPostId == search).ToListAsync());
+            }
             return View(await jobPortalWebContext.ToListAsync());
         }
 

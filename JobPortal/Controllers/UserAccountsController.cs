@@ -24,9 +24,13 @@ namespace JobPortal.Controllers
         }
 
         // GET: UserAccounts
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             var jobPortalWebContext = _context.UserAccounts.Include(u => u.UserType);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                return View(await jobPortalWebContext.Where(p => p.Email.Contains(searchString)).ToListAsync());
+            }
             return View(await jobPortalWebContext.ToListAsync());
         }
 
@@ -101,7 +105,6 @@ namespace JobPortal.Controllers
                 {
                     //Add Session
                     HttpContext.Session.SetInt32("UserAccountId", data.FirstOrDefault().Id);
-                    int a = (int)HttpContext.Session.GetInt32("UserAccountId");
                     HttpContext.Session.SetString("Email", data.FirstOrDefault().Email);
                     HttpContext.Session.SetInt32("UserTypeId", data.FirstOrDefault().UserTypeId);
                     return RedirectToAction("Index","Home");

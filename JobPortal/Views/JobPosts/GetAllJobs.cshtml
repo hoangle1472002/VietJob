@@ -10,9 +10,12 @@
 		   <div id="search_form" class="clearfix">
 		    <h1>Start your job search</h1>
 		    <p>
-			 <input type="text" class="text" placeholder=" " value="Enter Keyword(s)" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Keyword(s)';}">
-			 <input type="text" class="text" placeholder=" " value="Location" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Location';}">
-			 <label class="btn2 btn-2 btn2-1b"><input type="submit" value="Find Jobs"></label>
+                <form asp-action="GetAllJobs">
+			     <input name="jobName" type="text" class="text" placeholder=" " value="Enter Job" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Keyword(s)';}">
+			     <label class="btn2 btn-2 btn2-1b">
+                 <input type="submit" value="Find Jobs">
+                 </label>
+                </form>
 			</p>
            </div>
 		</div>
@@ -35,7 +38,7 @@
 			    <div class="jobs-item with-thumb">
 				    <div class="thumb">
                     <a href="jobs_single.html">
-                        <img src="./img/a1.jpg" class="img-responsive" alt=""/>
+                        <img src="~/img/a1.jpg" class="img-responsive" alt=""/>
                         </a></div>
 				    <div class="jobs_right">
 						<div class="date">30 <span>Jul</span></div>

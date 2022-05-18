@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 namespace JobPortal.Models
 {
     public partial class UserAccount
@@ -10,6 +11,7 @@ namespace JobPortal.Models
             JobPostActivities = new HashSet<JobPostActivity>();
         }
 
+        [DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int UserTypeId { get; set; }
         public string Email { get; set; } = null!;

@@ -1,32 +1,44 @@
-﻿@model IEnumerable<JobPortal.Models.JobPost>
+﻿@using PagedList.Mvc;
+@using PagedList;
+@using System.Web;
+@model PagedList.IPagedList<JobPortal.Models.JobPost>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="container">
+    <h1>Manage JobPosts</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class= "btn btn-primary">Create New</a>
 </p>
+
+<form asp-controller="JobPosts" asp-action="Index">
+    <p>
+        <input type="text" name="SearchString" placeholder="Enter Job" />
+        <input type="submit" value="Search" />
+    </p>
+</form>
+
 <table class="table">
    
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
+                Created Date
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.JobDescription)
+                JobDescription
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.JobLocation)
+                Location
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Company)
+                Company
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.JobType)
+                JobType
             </th>
             <th></th>
         </tr>
@@ -58,3 +70,8 @@
 }
     </tbody>
 </table>
+<br />
+</div>
+@*Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index",new { page }))*@
+

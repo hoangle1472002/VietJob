@@ -4,14 +4,26 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Manage Accounts</h1>
+<div class="container">
+    <h1>Manage Accounts</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
+
+<form asp-controller="UserAccounts" asp-action="Index">
+    <p>
+        <input type="text" name="SearchString" placeholder="Enter Account" />
+        <input type="submit" value="Search" />
+    </p>
+</form>
+
 <table class="table">
     <thead>
         <tr>
+              <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
@@ -42,6 +54,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+               <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
@@ -75,3 +90,7 @@
 }
     </tbody>
 </table>
+
+
+</div>
+

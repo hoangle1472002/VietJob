@@ -1,5 +1,6 @@
 ﻿
 @using Microsoft.AspNetCore.Http
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +19,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="~/css/style.css" rel='stylesheet' type='text/css' asp-append-version="true" />
 <link href='//fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css' asp-append-version="true">
 <!----font-Awesome----->
-<link href="~/css/font-awesome.css" rel="stylesheet" asp-append-version="true"> 
+<link href="./css/font-awesome.css" rel="stylesheet" asp-append-version="true"> 
 <!----font-Awesome----->
 </head>
 <body>
@@ -35,26 +36,60 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<img class="logo-img" src="~/img/Group 37.png" alt="Logo"/>
 				<h2 class="navbar-logo-title">VietJobs</h2>
 			</a>
+
+			@if(Context.Session.GetInt32("UserTypeId") == 1)
+				{
+				<div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+				  <ul class="navbar-nav">
+					<li class="nav-item dropdown">
+					  <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Manage System
+					  </a>
+					  <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+						<li><a asp-controller="UserAccounts" asp-action="Index">Manage Accounts</a></li>
+						<li><a asp-controller="Companies" asp-action="Index">Manage Companies</a></li>
+						<li><a asp-controller="JobPosts" asp-action="Index">Manage JobPosts</a></li>
+						<li><a asp-controller="JobPostActivities" asp-action="Index">Manage Application</a></li>
+						<li><a asp-controller="JobTypes" asp-action="Index">Manage JobTypes</a></li>
+					  </ul>
+					</li>
+				  </ul>
+				</div>
+				}
+	
+
 	    </div>
 	    <!--/.navbar-header-->
 	    <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height: 1px;">
 	        <ul class="nav navbar-nav ">
 		        <li class="dropdown nav-link-item">
 		            <a asp-controller="JobPosts" asp-action="GetAllJobs"  >Jobs</a>
+
 					<div class="under-line"></div>
 				</li>
 		        <li class="dropdown nav-link-item">
 		        	<a asp-controller="Companies" asp-action="GetAllCompanies" >Companies</a>
 					<div class="under-line"></div>
 				</li>
-		        <li class="nav-link-item">
-					<a asp-controller="UserAccounts" asp-action="Login" >Login</a>
-					<div class="under-line"></div>
-				</li>
-				<li class="nav-link-item">
+				@if(Context.Session.GetInt32("UserAccountId") > 0){
+					<li class="nav-link-item">
+							<a >@Context.Session.GetString("Email")</a>
+							<div class="under-line"></div>
+					</li>
+				
+					<li class="nav-link-item">
 					<a asp-controller="UserAccounts" asp-action="Logout">Logout</a>
 					<div class="under-line"></div>
 				</li>
+				}
+				else{
+				<li class="nav-link-item">
+					<a asp-controller="UserAccounts" asp-action="Login" >Login</a>
+					<div class="under-line"></div>
+				</li>
+				
+				}
+		  
 			</ul>
 	    </div>
 	    <div class="clearfix"> </div>

@@ -20,8 +20,12 @@ namespace JobPortal.Controllers
         }
 
         // GET: JobTypes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                return View(await _context.JobTypes.Where(p => p.JobType1.Contains(searchString)).ToListAsync());   
+            }
             return View(await _context.JobTypes.ToListAsync());
         }
 

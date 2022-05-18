@@ -20,8 +20,13 @@ namespace JobPortal.Controllers
         }
 
         // GET: Companies
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                return View(await _context.Companies.Where(p => p.CompanyName.Contains(searchString)).ToListAsync());
+            }
+
             return View(await _context.Companies.ToListAsync());
         }
         public async Task<IActionResult> GetAllCompanies()

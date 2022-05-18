@@ -40,6 +40,11 @@ html, body {
         -ms-transition: 0.5s all;
     }
 
+.navbar-header{
+    display:flex;
+    align-items : center;
+}
+
 .navbar-default {
     background-color: white !important;
     border-radius: 0px;
@@ -2328,7 +2333,6 @@ dl.experience {
 .experience_1 {
     padding: 14px 20px;
     background-color: none;
-    margin-left: 98px;
     margin-top: 5px;
     border: 1px solid #1890ff;
 }

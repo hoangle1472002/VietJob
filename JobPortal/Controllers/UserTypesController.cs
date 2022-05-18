@@ -20,8 +20,8 @@ namespace JobPortal.Controllers
         }
 
         // GET: UserTypes
-        public async Task<IActionResult> Index()
-        {
+        public async Task<IActionResult> Index(string searchString)
+        { 
             return View(await _context.UserTypes.ToListAsync());
         }
 
