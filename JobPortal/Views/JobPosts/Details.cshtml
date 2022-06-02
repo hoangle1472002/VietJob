@@ -1,4 +1,5 @@
 ﻿@model JobPortal.Models.JobPost
+@using Microsoft.AspNetCore.Http
 
 @{
     ViewData["Title"] = "Details";
@@ -16,11 +17,17 @@
 	       		 <dd>
 	       		 	<p>@Model.JobDescription</p>
 	       		 </dd>
-					<form asp-controller="JobPostActivities" asp-action="ApplyJob" asp-route-id="@Model.Id" >
-						<div id="search_wrapper1">
-								 <input type="submit" class="btn2 btn-2 btn2-1b" value="Apply"/>
-						   </div>
-					</form>
+									<form asp-controller="JobPostActivities" asp-action="@ViewData["Function"]" asp-route-id="@Model.Id" >
+										<div id="search_wrapper1">
+												 <input type="submit" class="btn2 btn-2 btn2-1b" value="@ViewData["ApplyOrCancel"]"/>
+										  </div>
+								</form>
+							
+						
+						
+					
+
+				
 					</div>
 	       	   </div>
 	       	  

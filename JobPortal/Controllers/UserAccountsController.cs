@@ -191,8 +191,11 @@ namespace JobPortal.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                
             }
+            _context.Update(userAccount);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
             ViewData["UserTypeId"] = new SelectList(_context.UserTypes, "Id", "Id", userAccount.UserTypeId);
             return View(userAccount);
         }

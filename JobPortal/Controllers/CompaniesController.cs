@@ -66,13 +66,13 @@ namespace JobPortal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,CompanyName,ProfileDescription,EstablishmentDate,CompanyWebsiteUrl,CompanyLogoUrl")] Company company)
         {
-            if (ModelState.IsValid)
-            {
+           // if (ModelState.IsValid)
+           // {
                 _context.Add(company);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            return View(company);
+           // }
+           // return View(company);
         }
 
         // GET: Companies/Edit/5

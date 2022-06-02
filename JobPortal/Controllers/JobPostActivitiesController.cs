@@ -43,6 +43,9 @@ namespace JobPortal.Controllers
                 .Include(j => j.JobPost)
                 .Include(j => j.UserAccount)
                 .FirstOrDefaultAsync(m => m.UserAccountId == id);
+
+
+
             if (jobPostActivity == null)
             {
                 return NotFound();
@@ -75,6 +78,22 @@ namespace JobPortal.Controllers
             ViewData["JobPostId"] = new SelectList(_context.JobPosts, "Id", "Id", jobPostActivity.JobPostId);
             ViewData["UserAccountId"] = new SelectList(_context.UserAccounts, "Id", "Id", jobPostActivity.UserAccountId);
             return View(jobPostActivity);
+        }
+
+     
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CancelApplyJob(int id)
+        {
+            int userAccountId = 0;
+            userAccountId = (int)HttpContext.Session.GetInt32("UserAccountId");
+            var jobPostActivity = await _context.JobPostActivities.
+                Where(s => s.UserAccountId == userAccountId && s.JobPostId == id).FirstOrDefaultAsync(); 
+                _context.Remove(jobPostActivity);
+            await _context.SaveChangesAsync();
+        
+            return RedirectToAction("GetAllJobs", "JobPosts");  
         }
 
         [HttpPost]
@@ -190,7 +209,7 @@ namespace JobPortal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var jobPostActivity = await _context.JobPostActivities.FindAsync(id);
+            var jobPostActivity = await _context.JobPostActivities.Where(s => s.JobPostId == id).FirstOrDefaultAsync();
             _context.JobPostActivities.Remove(jobPostActivity);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

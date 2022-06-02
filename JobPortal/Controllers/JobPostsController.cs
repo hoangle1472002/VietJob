@@ -55,11 +55,8 @@ namespace JobPortal.Controllers
                 return View(await jobPortalWebContext.Where(j => j.JobType.JobType1.Contains(jobName)).ToListAsync());
             }
                 return View(await jobPortalWebContext.ToListAsync());
-            
-           
-          
         }
-
+     
         // GET: JobPosts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -72,6 +69,22 @@ namespace JobPortal.Controllers
                 .Include(j => j.Company)
                 .Include(j => j.JobType)
                 .FirstOrDefaultAsync(m => m.Id == id);
+            ViewData["ApplyOrCancel"] = "Apply";
+            ViewData["Function"] = "ApplyJob";
+            if (HttpContext.Session.GetInt32("UserAccountId") != null)
+            {
+                int userAccountId = 0;
+                userAccountId = (int)HttpContext.Session.GetInt32("UserAccountId");
+                var isAvailableJob = await _context.JobPostActivities.Where(s => s.JobPostId == id && s.UserAccountId == userAccountId).ToListAsync();
+                if (isAvailableJob.Count > 0)
+                {
+                    ViewData["ApplyOrCancel"] = "Cancel";
+                    ViewData["Function"] = "CancelApplyJob";
+                }
+
+            }
+
+
             if (jobPost == null)
             {
                 return NotFound();
@@ -94,22 +107,23 @@ namespace JobPortal.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
      
-        public async Task<IActionResult> Create([Bind("Id,JobTypeId,CompanyId,CreatedDate,JobDescription")] JobPost jobPost)
+        public async Task<IActionResult> Create([Bind("Id,JobTypeId,CompanyId,CreatedDate,JobDescription,JobLocation")] JobPost jobPost)
         {
-            if (ModelState.IsValid)
-            {
-                 _context.JobPosts.Add(jobPost);
-                 _context.Add(jobPost);
-                 await _context.SaveChangesAsync();
-                  return RedirectToAction(nameof(Index));
-            }
-           // _context.Add(jobPost);
-           // await _context.SaveChangesAsync();
-           // return RedirectToAction(nameof(Index));
+            //if (ModelState.IsValid)
+            //{
+                 //_context.Add(jobPost);
+                 //await _context.SaveChangesAsync();          
+                 //_context.Add(jobPost);
+                 //await _context.SaveChangesAsync();
+                  //return RedirectToAction(nameof(Index));
+            //}
+            _context.Add(jobPost);
+            await _context.SaveChangesAsync();
             ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id", jobPost.CompanyId);
             ViewData["JobTypeId"] = new SelectList(_context.JobTypes, "Id", "Id", jobPost.JobTypeId);
+            return RedirectToAction(nameof(Index));
 
-            return View(jobPost);
+            //return View(jobPost);
         }
 
         // GET: JobPosts/Edit/5
@@ -165,6 +179,7 @@ namespace JobPortal.Controllers
             _context.Update(jobPost);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+
             ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id", jobPost.CompanyId);
             ViewData["JobTypeId"] = new SelectList(_context.JobTypes, "Id", "Id", jobPost.JobTypeId);
             return View(jobPost);

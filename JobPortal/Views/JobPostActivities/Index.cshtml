@@ -44,10 +44,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.UserAccount.Id)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+               <td>
+                <a asp-action="Delete" asp-route-id="@item.UserAccountId" >Delete</a>
             </td>
         </tr>
 }
