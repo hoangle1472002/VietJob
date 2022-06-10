@@ -210,6 +210,18 @@ namespace JobPortal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            //Delete jobpost elemenst in jobPostActivities
+            var jobPostActivities = await _context.JobPostActivities.Where(p => p.JobPostId == id).ToListAsync();
+            if (jobPostActivities.Any())
+            {
+                for(int i = 0;i< jobPostActivities.Count; i++)
+                {
+                    var activity = jobPostActivities[i];
+                    _context.JobPostActivities.Remove(activity);
+                }
+                await _context.SaveChangesAsync();
+            }
+            //Delete jobPost elements in JobPosts
             var jobPost = await _context.JobPosts.FindAsync(id);
             _context.JobPosts.Remove(jobPost);
             await _context.SaveChangesAsync();
