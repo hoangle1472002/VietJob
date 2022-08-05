@@ -211,7 +211,8 @@ namespace JobPortal.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             //Delete jobpost elemenst in jobPostActivities
-            var jobPostActivities = await _context.JobPostActivities.Where(p => p.JobPostId == id).ToListAsync();
+            var jobPostActivities = await _context.JobPostActivities.Where
+                (p => p.JobPostId == id).ToListAsync();
             if (jobPostActivities.Any())
             {
                 for(int i = 0;i< jobPostActivities.Count; i++)
